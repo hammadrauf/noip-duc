@@ -1,0 +1,33 @@
+---
+# tasks file for rpi-install-noip-dynamic-update-client
+
+- name: Download the TODO
+  get_url:
+    url: http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+    dest: /usr/local/src/
+
+- name: Unpack the TODO
+  unarchive:
+    src: /usr/local/src/noip-duc-linux.tar.gz
+    dest: /usr/local/src/
+    remote_src: yes
+
+- name: Install make
+  apt:
+    name: make
+    state: present
+
+- name: Install gcc
+  apt:
+    name: gcc
+    state: present
+
+- name: Run 'install' target as root TODO
+  community.general.make:
+    chdir: /usr/local/src/noip-2.1.9-1
+    targhet: all
+
+- name: Run 'install' target as root TODO
+  community.general.make:
+    chdir: /usr/local/src/noip-2.1.9-1
+    targhet: install

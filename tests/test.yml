@@ -1,0 +1,6 @@
+---
+- hosts: controller
+  remote_user: ubuntu
+  become: yes
+  roles:
+    - rpi-install-noip-dynamic-update-client
