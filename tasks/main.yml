@@ -31,3 +31,5 @@
   community.general.make:
     chdir: /usr/local/src/noip-2.1.9-1
     targhet: install
+    
+# TODO: use /etc/rc.local to start the client at boot
