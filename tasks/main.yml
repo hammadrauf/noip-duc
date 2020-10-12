@@ -22,14 +22,19 @@
     name: gcc
     state: present
 
-- name: Run 'install' target as root TODO
+- name: Run make
   community.general.make:
-    chdir: /usr/local/src/noip-2.1.9-1
-    targhet: all
-
-- name: Run 'install' target as root TODO
-  community.general.make:
-    chdir: /usr/local/src/noip-2.1.9-1
-    targhet: install
+    chdir: /usr/local/src/noip-2.1.9-1 
     
-# TODO: use /etc/rc.local to start the client at boot
+
+- name: Run make install 
+  community.general.make:
+    chdir: /usr/local/src/noip-2.1.9-1
+    target: install
+    
+- name: Ensure that noip2 is launched at boot
+  lineinfile:
+    path: /etc/rc.local
+    line: sudo /usr/local/bin/noip2
+    create: yes
+
