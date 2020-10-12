@@ -1,40 +1,40 @@
 Role Name
 =========
 
-A brief description of the role goes here.
-/usr/local/bin/noip2 -C
-/usr/local/bin/noip2
+This role install the dynamic update client on a raspberry pi.
+
+To start the client use the command: 
+
+    /usr/local/bin/noip2
+
+To reconfigure the client use the command:
+
+    /usr/local/bin/noip2 -C
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
-Role Variables
---------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+In order to work, gcc and the make tool must be installed.
+Oterwise the role will install said utility.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Out of the box use:
 
-    - hosts: servers
+    - hosts: raspberry
+      remote_user: ubuntu
+      become: yes
       roles:
-         - { role: username.rolename, x: 42 }
+        - rpi-install-noip-dynamic-update-client
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+If you like my work and whant to know more, visit my website:
+[mattiarubini.com](https://mattiarubini.com)
