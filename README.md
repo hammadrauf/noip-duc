@@ -15,7 +15,7 @@ Requirements
 ------------
 
 In order to work, gcc and the make tool must be installed.
-Oterwise the role will install said utility.
+Oterwise the role will install both utility.
 
 Example Playbook
 ----------------
