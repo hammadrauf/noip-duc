@@ -3,6 +3,8 @@ Role Name
 
 This role install the dynamic update client on a raspberry pi.
 
+The role follows the [official guide](https://www.noip.com/support/knowledgebase/install-ip-duc-onto-raspberry-pi/).
+
 To start the client use the command: 
 
     /usr/local/bin/noip2
