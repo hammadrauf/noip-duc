@@ -20,6 +20,10 @@ Oterwise the role will install said utility.
 Example Playbook
 ----------------
 
+Installing the play
+
+    ansible-galaxy install git+https://github.com/Mot93/rpi-install-noip-dynamic-update-client.git
+    
 Out of the box use:
 
     - hosts: raspberry
