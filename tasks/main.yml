@@ -1,15 +1,15 @@
 ---
 # tasks file for rpi-install-noip-dynamic-update-client
 
-- name: Download the TODO
+- name: Download the no-ip tar
   get_url:
     url: http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
-    dest: /usr/local/src/
+    dest: /home/pi/noip
 
-- name: Unpack the TODO
+- name: Unpack the no-ip tar
   unarchive:
-    src: /usr/local/src/noip-duc-linux.tar.gz
-    dest: /usr/local/src/
+    src: /home/pi/noip/noip-duc-linux.tar.gz
+    dest: /home/pi/noip
     remote_src: yes
 
 - name: Install make
@@ -24,17 +24,4 @@
 
 - name: Run make
   community.general.make:
-    chdir: /usr/local/src/noip-2.1.9-1 
-    
-
-- name: Run make install 
-  community.general.make:
-    chdir: /usr/local/src/noip-2.1.9-1
-    target: install
-    
-- name: Ensure that noip2 is launched at boot
-  lineinfile:
-    path: /etc/rc.local
-    line: sudo /usr/local/bin/noip2
-    create: yes
-
+    chdir: /home/pi/noip/noip-2.1.9-1 
