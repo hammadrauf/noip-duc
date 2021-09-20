@@ -33,6 +33,19 @@ Out of the box use:
       become: yes
       roles:
         - rpi-install-noip-dynamic-update-client
+        
+Once the playbook has completed it's operation, login in the pi and execute the following commands:
+
+    cd /home/pi/noip
+    sudo make install
+    
+Once the configuration is completed, launche the following command to make sure that the agent runs at startup:
+    
+    sudo /usr/local/bin/noip2
+
+To check the configuration simply run:
+
+    sudo /usr/local/bin/noip2 -S
 
 License
 -------
