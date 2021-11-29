@@ -4,12 +4,12 @@
 - name: Download the no-ip tar
   get_url:
     url: http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
-    dest: /home/pi/noip
+    dest: /opt/noip
 
 - name: Unpack the no-ip tar
   unarchive:
     src: /home/pi/noip/noip-duc-linux.tar.gz
-    dest: /home/pi/noip
+    dest: /opt/noip
     remote_src: yes
 
 - name: Install make
@@ -24,4 +24,4 @@
 
 - name: Run make
   community.general.make:
-    chdir: /home/pi/noip/noip-2.1.9-1 
+    chdir: /opt/noipnoip-2.1.9-1 
