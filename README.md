@@ -46,7 +46,7 @@ Once the configuration is completed, launche the following command to make sure 
 To check the configuration simply run:
 
     sudo /usr/local/bin/noip2 -S
-
+    
 License
 -------
 
@@ -55,5 +55,5 @@ MIT
 Author Information
 ------------------
 
-If you like my work and whant to know more, visit my website:
-[mattiarubini.com](https://mattiarubini.com)
+If you like my work and want to know more, visit my website:
+[www.mattiarubini.com](https://www.mattiarubini.com)
