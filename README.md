@@ -16,7 +16,7 @@ To reconfigure the client use the command:
 Requirements
 ------------
 
-In order to work, gcc and the make tool must be installed.
+In order to work, `gcc` and the `make` tool must be installed.
 Oterwise the role will install both utility.
 
 Example Playbook
@@ -39,7 +39,7 @@ Once the playbook has completed it's operation, login in the pi and execute the 
     cd /home/pi/noip
     sudo make install
     
-Once the configuration is completed, launche the following command to make sure that the agent runs at startup:
+Once the configuration is completed, launch the following command to make sure that the agent runs at startup:
     
     sudo /usr/local/bin/noip2
 
