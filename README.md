@@ -1,7 +1,9 @@
 Role Name
 =========
 
-This role install the dynamic update client on a raspberry pi.
+Forked from: [Mot93 - noip duc client for RPi](https://github.com/Mot93/rpi-install-noip-dynamic-update-client)
+
+This role install the NOIP.com dynamic update client.
 
 The role follows the [official guide](https://www.noip.com/support/knowledgebase/install-ip-duc-onto-raspberry-pi/).
 
