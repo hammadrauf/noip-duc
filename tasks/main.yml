@@ -1,27 +1,57 @@
 ---
-# tasks file for rpi-install-noip-dynamic-update-client
+# tasks file for noip-dynamic-update-client
+# Refernce: https://www.noip.com/support/knowledgebase/install-linux-3-x-dynamic-update-client-duc#install_from_source
+#
+- name: Make sure build essential packages are installed on Debian family
+  ansible.builtin.apt:
+    pkg:
+      - gcc
+      - g++
+      - make
+    state: present
+  when:
+    - ansible_os_family == 'Debian'    
 
-- name: Download the no-ip tar
+- name: Make sure build essential packages are installed on RHEL Family
+  ansible.builtin.yum:
+    name:
+      - gcc
+      - gcc-c++
+      - make
+    state: present
+  when:
+    - ansible_os_family == 'RedHat'    
+
+- name: Download the noip-duc tar 
   get_url:
-    url: http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
-    dest: /opt/noip
+    url: "https://dmej8g5cpdyqd.cloudfront.net/downloads/noip-duc_{{ tar_version }}.tar.gz"
+    dest: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}.tar.gz"
 
-- name: Unpack the no-ip tar
-  unarchive:
-    src: /home/pi/noip/noip-duc-linux.tar.gz
-    dest: /opt/noip
+- name: Create the untaring subfolder
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}"
+    state: directory
+
+- name: Unarchive the noip-duc tar.gz
+  ansible.builtin.unarchive:
+    src: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}.tar.gz"
+    dest: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}"
     remote_src: yes
+    extra_opts:
+    - "--strip-components{{'='}}1"
 
-- name: Install make
-  apt:
-    name: make
-    state: present
+- name: Download and execute Rust Install script using 'curl'
+  ansible.builtin.shell: |
+    sh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
 
-- name: Install gcc
-  apt:
-    name: gcc
-    state: present
+- name: Update Shell Paths after Rust installation and Execute Rust Cargo build of Noip-duc
+  ansible.builtin.shell: |
+    cd {{ ansible_env.HOME }}
+    . "$HOME/.cargo/env"
+    cd {{ ansible_env.HOME }}/noip-duc_{{ tar_version }}
+    cargo build --release
 
-- name: Run make
-  community.general.make:
-    chdir: /opt/noipnoip-2.1.9-1 
+- name: Copy the newly built noip-duc binary to Executable path.
+  ansible.builtin.shell: |
+    cd {{ ansible_env.HOME }}/noip-duc_{{ tar_version }}
+    cp target/release/noip-duc /usr/bin
