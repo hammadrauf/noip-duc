@@ -1,4 +1,4 @@
-# Ansible Role: noip-duc
+# Ansible Role: noipduc
 
 Forked from: [Mot93 - noip duc client for RPi](https://github.com/Mot93/rpi-install-noip-dynamic-update-client)
 
@@ -13,7 +13,7 @@ None
 
 ### Default variables
 
-```(yaml)
+```
 tar_version: "3.1.0"
 noip_username: "noip_user"
 noip_password: "password"
@@ -24,7 +24,7 @@ noip_check_interval: "900s"
 ```
 
 ### Vars variable
-```(yaml)
+```
 tar_version: "3.1.0"
 noip_username: "noip_user"
 noip_password: "password"
@@ -45,7 +45,7 @@ Including an example of how to use your role (for instance, with variables passe
       become: true
       tasks:
         - import_role:
-            name: hammadrauf.noip-duc
+            name: hammadrauf.noipduc
           vars:
             noip_username: "noip_user"
             noip_password: "password"

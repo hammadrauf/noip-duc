@@ -13,7 +13,7 @@ name: Release
 
 defaults:
   run:
-    working-directory: 'hammadrauf.noip-duc'
+    working-directory: 'hammadrauf.noipduc'
 
 jobs:
 
@@ -24,7 +24,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v4
         with:
-          path: 'hammadrauf.noip-duc'
+          path: 'hammadrauf.noipduc'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v5
