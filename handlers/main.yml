@@ -1,1 +1,11 @@
 ---
+- name: Disable_Service_NoipDuc
+  ansible.builtin.service:
+    name: noip-duc
+    enabled: false
+    state: stopped
+- name: Enable_Service_NoipDuc
+  ansible.builtin.service:
+    name: noip-duc
+    enabled: true
+    state: reloaded

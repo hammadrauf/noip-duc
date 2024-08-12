@@ -1,2 +1,8 @@
 ---
 tar_version: "3.1.0"
+noip_username: "noip_user"
+noip_password: "password"
+noip_domain_names:
+  - abc.com
+  - xyz.ca
+noip_check_interval: "900s"

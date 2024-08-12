@@ -2,6 +2,58 @@
 # tasks file for noip-dynamic-update-client
 # Refernce: https://www.noip.com/support/knowledgebase/install-linux-3-x-dynamic-update-client-duc#install_from_source
 #
+
+- name: Determine if package gcc is installed
+  ansible.builtin.package:
+    name: gcc
+    state: present
+  check_mode: true
+  register: installed_gcc
+
+# - name: Debug the value 
+#   debug:
+#     var: installed_gcc
+
+- name: Determine if package make is installed
+  ansible.builtin.package:
+    name: make
+    state: present
+  check_mode: true
+  register: installed_make
+
+- name: Determine if package g++ is installed, Debian family OS only
+  ansible.builtin.package:
+    name: g++
+    state: present
+  check_mode: true
+  register: installed_gpp
+  when:
+    - ansible_os_family == 'Debian'    
+
+- name: Determine if package gcc-c++ is installed, RHEL family OS only
+  ansible.builtin.package:
+    name: gcc-c++
+    state: present
+  check_mode: true
+  register: installed_gcccpp
+  when:
+    - ansible_os_family == 'RedHat'    
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+  when: (installed_gcc is defined or installed_make is defined or installed_gpp is defined) and ansible_os_family == 'Debian'
+
+- name: Update and upgrade yum packages
+  yum:
+    update_cache: yes
+    name: '*'
+    state: latest
+  when: (installed_gcc is defined or installed_make is defined or installed_gcccpp is defined) and ansible_os_family == 'RedHat'
+
 - name: Make sure build essential packages are installed on Debian family
   ansible.builtin.apt:
     pkg:
@@ -55,3 +107,22 @@
   ansible.builtin.shell: |
     cd {{ ansible_env.HOME }}/noip-duc_{{ tar_version }}
     cp target/release/noip-duc /usr/bin
+
+- name: Create NOIP-DUC configuration file
+  ansible.builtin.template:
+    src: "templates/noip-duc.conf.j2"
+    dest: "/etc/default/noip-duc.conf"
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Create the NOIP-DUC systemd file
+  ansible.builtin.template:
+    src: "templates/noip-duc.service"
+    dest: "/etc/systemd/system/noip-duc.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Disable_Service_NoipDuc
+    - Enable_Service_NoipDuc

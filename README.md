@@ -1,61 +1,62 @@
-Role Name
-=========
+# Ansible Role: noip-duc
 
 Forked from: [Mot93 - noip duc client for RPi](https://github.com/Mot93/rpi-install-noip-dynamic-update-client)
 
-This role install the NOIP.com dynamic update client.
+This role installs the NOIP.com dynamic update client, and launches it as a service. For Debian and RHEL based OSes.
 
-The role follows the [official guide](https://www.noip.com/support/knowledgebase/install-ip-duc-onto-raspberry-pi/).
+The role follows the [official guide](https://www.noip.com/support/knowledgebase/install-linux-3-x-dynamic-update-client-duc#install_from_source).
 
-To start the client use the command: 
 
-    /usr/local/bin/noip2
+## Requirements
+None
 
-To reconfigure the client use the command:
 
-    /usr/local/bin/noip2 -C
+### Default variables
 
-Requirements
-------------
+```(yaml)
+tar_version: "3.1.0"
+noip_username: "noip_user"
+noip_password: "password"
+noip_domain_names:
+  - abc.com
+  - xyz.ca
+noip_check_interval: "900s"
+```
 
-In order to work, `gcc` and the `make` tool must be installed.
-Oterwise the role will install both utility.
+### Vars variable
+```(yaml)
+tar_version: "3.1.0"
+noip_username: "noip_user"
+noip_password: "password"
+noip_domain_names:
+  - abc.com
+  - xyz.ca
+noip_check_interval: "900s"
+```
 
-Example Playbook
-----------------
+## Dependencies
+None
 
-Installing the play
+## Example Playbook
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    ansible-galaxy install git+https://github.com/Mot93/rpi-install-noip-dynamic-update-client.git
-    
-Out of the box use:
+```
+    - hosts: servers
+      become: true
+      tasks:
+        - import_role:
+            name: hammadrauf.noip-duc
+          vars:
+            noip_username: "noip_user"
+            noip_password: "password"
+            noip_domain_names:
+            - abc.com
+```
 
-    - hosts: raspberry
-      remote_user: ubuntu
-      become: yes
-      roles:
-        - rpi-install-noip-dynamic-update-client
-        
-Once the playbook has completed it's operation, login in the pi and execute the following commands:
-
-    cd /home/pi/noip
-    sudo make install
-    
-Once the configuration is completed, launch the following command to make sure that the agent runs at startup:
-    
-    sudo /usr/local/bin/noip2
-
-To check the configuration simply run:
-
-    sudo /usr/local/bin/noip2 -S
-    
-License
--------
-
+## License
 MIT
 
-Author Information
-------------------
+## Authors
+- Mattia Rubini
+- Hammad Rauf
 
-If you like my work and want to know more, visit my website:
-[www.mattiarubini.com](https://www.mattiarubini.com)
