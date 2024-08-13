@@ -76,18 +76,18 @@
 
 - name: Download the noip-duc tar 
   get_url:
-    url: "https://dmej8g5cpdyqd.cloudfront.net/downloads/noip-duc_{{ tar_version }}.tar.gz"
-    dest: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}.tar.gz"
+    url: "https://dmej8g5cpdyqd.cloudfront.net/downloads/noip-duc_{{ noip_tar_version }}.tar.gz"
+    dest: "{{ ansible_env.HOME }}/noip-duc_{{ noip_tar_version }}.tar.gz"
 
 - name: Create the untaring subfolder
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}"
+    path: "{{ ansible_env.HOME }}/noip-duc_{{ noip_tar_version }}"
     state: directory
 
 - name: Unarchive the noip-duc tar.gz
   ansible.builtin.unarchive:
-    src: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}.tar.gz"
-    dest: "{{ ansible_env.HOME }}/noip-duc_{{ tar_version }}"
+    src: "{{ ansible_env.HOME }}/noip-duc_{{ noip_tar_version }}.tar.gz"
+    dest: "{{ ansible_env.HOME }}/noip-duc_{{ noip_tar_version }}"
     remote_src: yes
     extra_opts:
     - "--strip-components{{'='}}1"
@@ -100,12 +100,12 @@
   ansible.builtin.shell: |
     cd {{ ansible_env.HOME }}
     . "$HOME/.cargo/env"
-    cd {{ ansible_env.HOME }}/noip-duc_{{ tar_version }}
+    cd {{ ansible_env.HOME }}/noip-duc_{{ noip_tar_version }}
     cargo build --release
 
 - name: Copy the newly built noip-duc binary to Executable path.
   ansible.builtin.shell: |
-    cd {{ ansible_env.HOME }}/noip-duc_{{ tar_version }}
+    cd {{ ansible_env.HOME }}/noip-duc_{{ noip_tar_version }}
     cp target/release/noip-duc /usr/bin
 
 - name: Create NOIP-DUC configuration file

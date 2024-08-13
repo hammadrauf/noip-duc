@@ -14,7 +14,7 @@ None
 ### Default variables
 
 ```
-tar_version: "3.1.0"
+noip_tar_version: "3.1.0"
 noip_username: "noip_user"
 noip_password: "password"
 noip_domain_names:
@@ -23,16 +23,7 @@ noip_domain_names:
 noip_check_interval: "900s"
 ```
 
-### Vars variable
-```
-tar_version: "3.1.0"
-noip_username: "noip_user"
-noip_password: "password"
-noip_domain_names:
-  - abc.com
-  - xyz.ca
-noip_check_interval: "900s"
-```
+
 
 ## Dependencies
 None
